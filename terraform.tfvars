@@ -1,5 +1,5 @@
 ## Resource Group
-resource_group_name       = "myResourceGroup"
+resource_group_name       = "myResourceGroup1"
 resource_group_location   = "East US"
 
 # VNET

@@ -9,8 +9,8 @@ data "azurerm_storage_account" "existing" {
 }
 
 # Use the retrieved information in another resource
-resource "azurerm_storage_container" "example" {
-  name                  = "tfstate"
-  storage_account_name  = data.azurerm_storage_account.existing.name
-  container_access_type = "private"
-}
+# resource "azurerm_storage_container" "example" {
+#   name                  = "tfstate"
+#   storage_account_name  = data.azurerm_storage_account.existing.name
+#   container_access_type = "private"
+# }
