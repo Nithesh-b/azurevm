@@ -15,10 +15,10 @@ install_docker_and_compose() {
   sudo dnf repolist -v
 
   # Install Docker (latest version)
-  sudo dnf install --nobest docker-ce
+  sudo dnf install --nobest docker-ce -y
 
   # Install containerd.io
-  sudo dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+  sudo dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm -y
 
   # Install Docker Compose
   curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o docker-compose
@@ -45,7 +45,7 @@ sudo dnf install git -y
 install_docker_and_compose
 
 # Clone Decidim repository
-git clone --branch v$DECIDIM_VERSION https://github.com/decidim/decidim.git $DECIDIM_APP_NAME
+git clone https://github.com/decidim/docker.git $DECIDIM_APP_NAME
 
 # Navigate to the Decidim app directory
 cd $DECIDIM_APP_NAME
