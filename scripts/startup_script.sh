@@ -8,22 +8,21 @@ SECRET_KEY_BASE="your_secret_key_base" # Change this to a secret key base for De
 
 # Function to install Docker and Docker Compose
 install_docker_and_compose() {
-  # Add Docker repository
-  sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+  # Update package list and install required tools
+  sudo apt update
+  sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 
-  # List available repositories
-  sudo dnf repolist -v
+  # Add Docker repository and GPG key
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
   # Install Docker (latest version)
-  sudo dnf install --nobest docker-ce -y
-
-  # Install containerd.io
-  sudo dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm -y
+  sudo apt update
+  sudo apt install -y docker-ce docker-ce-cli containerd.io
 
   # Install Docker Compose
-  curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o docker-compose
-  sudo mv docker-compose /usr/local/bin && sudo chmod +x /usr/local/bin/docker-compose
-  sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  sudo chmod +x /usr/local/bin/docker-compose
 
   # Enable and start Docker service
   sudo systemctl enable --now docker
@@ -39,7 +38,7 @@ install_docker_and_compose() {
 }
 
 # Install Git
-sudo dnf install git -y
+sudo apt install git -y
 
 # Install Docker and Docker Compose
 install_docker_and_compose

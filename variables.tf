@@ -82,9 +82,9 @@ variable "source_image" {
     version   = string
   })
   default = {
-    publisher = "RedHat"
-    offer     = "RHEL"
-    sku       = "8-LVM"
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts-gen2"
     version   = "latest"
   }
 }
